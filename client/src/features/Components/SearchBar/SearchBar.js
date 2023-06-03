@@ -10,8 +10,8 @@ const SearchBar = ({ onHandleSubmit }) => {
 
     return (
         <div className="search">
-            <form onSubmit={(event) => handleSubmit(event)}>
-                <input type="submit" value="Search"></input>
+            <form className="joke-button-form" onSubmit={(event) => handleSubmit(event)}>
+                <input className="joke-button"type="submit" value="Joke"></input>
             </form>
         </div>
     )

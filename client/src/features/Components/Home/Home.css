@@ -1,0 +1,10 @@
+.joke-card {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.title {
+    margin-bottom: 16px;
+}

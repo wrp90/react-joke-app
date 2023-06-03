@@ -1,0 +1,7 @@
+.search {
+    display: flex;
+}
+
+.joke-button {
+    justify-content: center;
+}
