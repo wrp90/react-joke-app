@@ -11,9 +11,16 @@ const Home = () => {
     const [jokeType, setJokeType] = useState('');
     const initAPI = async () => {
         const userResponse = await fetch(
-            `https://v2.jokeapi.dev/joke/${jokeType}?type=single`
+            `https://v2.jokeapi.dev/joke/${jokeType}?blacklistFlags=racist&type=single`
         );
         const response = await userResponse.json();
+        // if (response.error === true) {
+        //     setSearchError(response.error);
+        // } else {
+        //     if (searchError) {
+        //         setSearchError('')
+        //     }
+        // };
         console.log(response);
         dispatch(searchJoke(response));
     };
@@ -25,7 +32,9 @@ const Home = () => {
             <NavbarElement setJokeType={setJokeType}/>
             <div className="joke-card">
                 <h2 className="title">Joke Generator</h2>
-                <p>Welcome to my joke site!  Please select a joke type then hit the joke button!</p>
+                <p>
+                    Welcome to my joke site!  Please select a joke type then hit the joke button!
+                </p>
                 <SearchBar onHandleSubmit={initAPI} />
                 {joke && <JokeCard joke={joke} />}
             </div>

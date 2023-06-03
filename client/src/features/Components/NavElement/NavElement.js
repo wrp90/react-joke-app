@@ -13,7 +13,7 @@ const NavElement = ({ setJokeType }) => {
                     <Nav className="ms-auto">
                         <NavDropdown className="mx-auto" title="Select Joke Type" id="basic-nav-dropdown">
                             <NavDropdown.Item onClick={() => setJokeType('Any')}>Any</NavDropdown.Item>
-                            <NavDropdown.Item onClick={() => setJokeType('Misc')}>Misc</NavDropdown.Item>
+                            <NavDropdown.Item onClick={() => setJokeType('Miscellaneous')}>Miscellaneous</NavDropdown.Item>
                             <NavDropdown.Item onClick={() => setJokeType('Programming')} >
                                 Programming
                             </NavDropdown.Item>
