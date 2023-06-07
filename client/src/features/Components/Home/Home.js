@@ -26,9 +26,9 @@ const Home = () => {
     };
 
     const joke = useSelector(currentJoke);
-    console.log("joketype:", jokeType);
+
     return (
-        <div className="container">
+        <div>
             <NavbarElement setJokeType={setJokeType}/>
             <div className="joke-card">
                 <h2 className="title">Joke Generator</h2>

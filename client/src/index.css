@@ -12,7 +12,8 @@ code {
     monospace;
 }
 
-.login-container {
+.login-container,
+.register-container {
   margin: 5rem auto;
   width: 500px;
 }
