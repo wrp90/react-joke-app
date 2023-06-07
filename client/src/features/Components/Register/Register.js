@@ -1,4 +1,4 @@
-import { Form, Button, Row } from 'react-bootstrap';
+import { Form, Button, Row, InputGroup } from 'react-bootstrap';
 import { setIsLoggedIn, setUserInformation } from '../../../app/slices/userSlice';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
@@ -8,6 +8,8 @@ import NavElement from '../NavElement/NavElement';
 const Register = () => {
     const dispatch = useDispatch()
     const navigate = useNavigate();
+    const [showPassword, setShowPassword] = useState(false);
+    const [password, setPassword] = useState('');
     const [user, setUser] = useState({
         firstName: "",
         lastName: "",
@@ -15,6 +17,15 @@ const Register = () => {
         email: "",
         password: "",
     });
+
+    const togglePasswordVisibility = () => {
+        setShowPassword(!showPassword);
+    };
+
+    const onPasswordEntry = (event) => {
+        setUser({ ...user, password: event.target.value })
+        setPassword(event.target.value);
+    }
 
     const submitRegistration = async (event) => {
         event.preventDefault();
@@ -88,13 +99,19 @@ const Register = () => {
                     </Form.Group>
                     <Form.Group className="mt-2">
                         <Form.Label>Password</Form.Label>
-                        <Form.Control
-                            type="password"
-                            placeholder="Password"
-                            required onChange={(event) =>
-                                setUser({ ...user, password: event.target.value })
-                            }
-                        />
+                        <InputGroup>
+                            <Form.Control
+                                type={showPassword ? 'text' : 'password'}
+                                value={password}
+                                placeholder="Password"
+                                required onChange={(event) =>
+                                    onPasswordEntry(event)
+                                }
+                            />
+                            <Button variant="outline-secondary show-hide-button" onClick={togglePasswordVisibility}>
+                                {showPassword ? 'Hide' : 'Show'}
+                            </Button>
+                        </InputGroup>
                     </Form.Group>
                     <Button variant="primary" className="mt-2" type="submit">
                         Submit
