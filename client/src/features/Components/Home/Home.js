@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from 'react-redux';
-import { currentJoke, searchJoke } from '../../../app/jokeSlice';
+import { currentJoke, searchJoke } from '../../../app/slices/jokeSlice';
 import { useState } from 'react';
 import NavbarElement from "../NavElement/NavElement";
 import SearchBar from "../SearchBar/SearchBar";
