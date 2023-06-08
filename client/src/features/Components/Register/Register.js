@@ -40,10 +40,6 @@ const Register = () => {
 
         const data = await newUser.json();
 
-        if (data.message) {
-            // return setMessage(data.message);
-        };
-
         const { firstName, lastName, email, username } = data;
         dispatch(setUserInformation({ ...firstName, lastName, email, username }));
         dispatch(setIsLoggedIn(true));

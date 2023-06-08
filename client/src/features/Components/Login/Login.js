@@ -2,8 +2,8 @@ import { Form, Button, Row, InputGroup } from 'react-bootstrap';
 import { Link, useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { useState } from 'react';
+import { setIsLoggedIn, setUserInformation } from '../../../app/slices/userSlice';
 import NavElement from '../NavElement/NavElement';
-import { setIsLoggedIn } from '../../../app/slices/userSlice';
 
 const Login = () => {
     const dispatch = useDispatch()
@@ -16,8 +16,7 @@ const Login = () => {
         password: "",
     });
 
-    const [isLoggingIn, setIsLoggingIn] = useState(true);
-    // const [message, setMessage] = useState(null);
+    const [message, setMessage] = useState(null);
 
     const onPasswordEntry = (event) => {
         setUser({ ...user, password: event.target.value })
@@ -41,12 +40,14 @@ const Login = () => {
         });
 
         const data = await newUser.json();
+        console.log("login data:", data);
 
         if (data.message) {
-            // return setMessage(data.message);
+            return setMessage(data.message);
         }
-
-        console.log(data);
+        localStorage.setItem('token', data.token);
+        const { firstName, lastName, email, username } = data.user;
+        dispatch(setUserInformation({ firstName, lastName, email, username }));
         dispatch(setIsLoggedIn(true));
         navigate('/dashboard');
     };
@@ -95,8 +96,8 @@ const Login = () => {
                         </Form.Text>
                     </div>
                 </Form>
+                {message && <p>{message}</p>}
             </Row>
-            {/* {message && <p>{message}</p>} */}
         </div>
     );
 };
