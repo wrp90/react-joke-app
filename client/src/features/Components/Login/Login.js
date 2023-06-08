@@ -13,14 +13,14 @@ const Login = () => {
     const [password, setPassword] = useState('');
     const [user, setUser] = useState({
         email: "",
-        userName: "",
         password: "",
     });
-    console.log('user:', user)
 
-    const handleChange = (event) => {
-        const { email, userName, password, value } = event.target;
-        setUser({ ...user, [email]: value, [userName]: value, [password]: value, });
+    const [isLoggingIn, setIsLoggingIn] = useState(true);
+    // const [message, setMessage] = useState(null);
+
+    const onPasswordEntry = (event) => {
+        setUser({ ...user, password: event.target.value })
         setPassword(event.target.value);
     };
 
@@ -28,7 +28,6 @@ const Login = () => {
         setShowPassword(!showPassword);
     };
 
-    // const [message, setMessage] = useState(null)
 
     const submitLogin = async (event) => {
         event.preventDefault();
@@ -42,7 +41,6 @@ const Login = () => {
         });
 
         const data = await newUser.json();
-        console.log('logindata:', data)
 
         if (data.message) {
             // return setMessage(data.message);
@@ -65,7 +63,9 @@ const Login = () => {
                             name="email"
                             type="email"
                             placeholder="Enter email"
-                            onChange={handleChange}
+                            required onChange={(event) =>
+                                setUser({ ...user, email: event.target.value })
+                            }
                         />
                     </Form.Group>
                     <Form.Group controlId="password">
@@ -76,7 +76,9 @@ const Login = () => {
                                 type={showPassword ? "text" : "password"}
                                 value={password}
                                 placeholder="Password"
-                                onChange={handleChange}
+                                required onChange={(event) =>
+                                    onPasswordEntry(event)
+                                }
                             />
                             <Button variant="outline-secondary show-hide-button" onClick={togglePasswordVisibility}>
                                 {showPassword ? 'Hide' : 'Show'}

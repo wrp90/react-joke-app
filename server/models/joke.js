@@ -14,7 +14,7 @@ module.exports = (sequelize, DataTypes) => {
     }
   }
   Joke.init({
-    userId: DataTypes.NUMBER,
+    userId: DataTypes.INTEGER,
     catagory: DataTypes.STRING,
     joke: DataTypes.TEXT
   }, {

@@ -39,7 +39,6 @@ const Register = () => {
         });
 
         const data = await newUser.json();
-        console.log("register user data:", data)
 
         if (data.message) {
             // return setMessage(data.message);
@@ -48,7 +47,7 @@ const Register = () => {
         const { firstName, lastName, email, username } = data;
         dispatch(setUserInformation({ ...firstName, lastName, email, username }));
         dispatch(setIsLoggedIn(true));
-        navigate('/dashboard');
+        navigate('/login');
     };
 
     return (
