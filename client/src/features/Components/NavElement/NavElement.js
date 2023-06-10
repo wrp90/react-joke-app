@@ -25,12 +25,20 @@ const NavElement = ({ setJokeType, hideDropDown, hideLogin }) => {
 
     if (isLoggedIn || hasToken) {
       return (
-        <Link
-          className="navbar-brand"
-          to={isLoggedIn || hasToken ? '/logout' : '/login'}
-        >
-          {isLoggedIn || hasToken ? 'Log Out' : 'Log In'}
-        </Link>
+        <>
+          <Link
+            className="navbar-brand"
+            to="/dashboard">
+
+            Dashboard
+          </Link>
+          <Link
+            className="navbar-brand"
+            to={isLoggedIn || hasToken ? '/logout' : '/login'}
+          >
+            {isLoggedIn || hasToken ? 'Log Out' : 'Log In'}
+          </Link>
+        </>
       );
     }
   };

@@ -50,7 +50,7 @@ const Login = () => {
         const { firstName, lastName, email, username } = data.user;
         dispatch(setUserInformation({ firstName, lastName, email, username }));
         dispatch(setIsLoggedIn(true));
-        navigate('/home');
+        navigate('/');
     };
 
     return (
