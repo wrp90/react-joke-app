@@ -1,7 +1,10 @@
-.App {
-  text-align: center;
+@import url('https://fonts.googleapis.com/css2?family=Kablammo&family=Noto+Sans&family=Noto+Sans+JP:wght@200;300&family=Open+Sans:wght@400;500&display=swap');
+
+* {
+  font-family: 'Noto Sans', sans-serif;
 }
 
 .container {
   padding: 0px !important;
 }
+

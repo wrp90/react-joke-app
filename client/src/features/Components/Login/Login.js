@@ -40,26 +40,28 @@ const Login = () => {
         });
 
         const data = await newUser.json();
-        console.log("login data:", data);
+        console.log("New User Data:", data);
 
         if (data.message) {
             return setMessage(data.message);
-        }
+        };
+
         localStorage.setItem('token', data.token);
         const { firstName, lastName, email, username } = data.user;
         dispatch(setUserInformation({ firstName, lastName, email, username }));
         dispatch(setIsLoggedIn(true));
-        navigate('/dashboard');
+        navigate('/home');
     };
 
     return (
         <div>
             <NavElement hideDropDown hideLogin />
             <Row className="login-container">
+                {message && <p>{message}</p>}
                 <h2 className="mb-2">Login</h2>
                 <Form onSubmit={e => submitLogin(e)} className="login-form">
                     <Form.Group controlId="email">
-                        <Form.Label>Email address</Form.Label>
+                        <Form.Label className="mt-3">Email address</Form.Label>
                         <Form.Control
                             name="email"
                             type="email"
@@ -86,7 +88,7 @@ const Login = () => {
                             </Button>
                         </InputGroup>
                     </Form.Group>
-                    <div className="mt-2 ">
+                    <div className="mt-3 d-flex align-items-center">
                         <Button variant="primary" type="submit">
                             Log In
                         </Button>
@@ -96,7 +98,6 @@ const Login = () => {
                         </Form.Text>
                     </div>
                 </Form>
-                {message && <p>{message}</p>}
             </Row>
         </div>
     );

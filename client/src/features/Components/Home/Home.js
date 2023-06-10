@@ -1,10 +1,11 @@
 import { useDispatch, useSelector } from 'react-redux';
-import { currentJoke, searchJoke } from '../../../app/slices/jokeSlice';
+import { selectCurrentJoke, setCurrentJoke } from '../../../app/slices/jokeSlice';
+import { Button, Dropdown, DropdownButton } from 'react-bootstrap';
 import { useState } from 'react';
 import NavbarElement from "../NavElement/NavElement";
-import SearchBar from "../SearchBar/SearchBar";
 import JokeCard from '../JokeCard/JokeCard';
 import './Home.css';
+
 
 const Home = () => {
     const dispatch = useDispatch();
@@ -22,20 +23,50 @@ const Home = () => {
         //     }
         // };
         console.log(response);
-        dispatch(searchJoke(response));
+        dispatch(setCurrentJoke(response));
     };
 
-    const joke = useSelector(currentJoke);
+    const joke = useSelector(selectCurrentJoke);
 
     return (
         <div>
-            <NavbarElement setJokeType={setJokeType}/>
+            <NavbarElement setJokeType={setJokeType} />
             <div className="joke-card">
-                <h2 className="title">Joke Generator</h2>
+                <h1 className="title">Joke Generator</h1>
                 <p>
                     Welcome to my joke site!  Please select a joke type then hit the joke button!
                 </p>
-                <SearchBar onHandleSubmit={initAPI} />
+                <div className="joke-controls">
+                    <DropdownButton
+                        variant="info"
+                        id="dropdown-basic-button"
+                        title="Dropdown button"
+                        className="me-2"
+                    >
+                        <Dropdown.Item onClick={() => setJokeType('Any')}>
+                            Any
+                        </Dropdown.Item>
+                        <Dropdown.Item
+                            onClick={() => setJokeType('Miscellaneous')}
+                        >
+                            Miscellaneous
+                        </Dropdown.Item>
+                        <Dropdown.Item
+                            onClick={() => setJokeType('Programming')}
+                        >
+                            Programming
+                        </Dropdown.Item>
+                        <Dropdown.Item onClick={() => setJokeType('Dark')}>
+                            Dark
+                        </Dropdown.Item>
+                        <Dropdown.Item onClick={() => setJokeType('Pun')}>
+                            Pun
+                        </Dropdown.Item>
+                    </DropdownButton>
+                    <Button variant="primary" onClick={initAPI}>
+                        Joke
+                    </Button>
+                </div>
                 {joke && <JokeCard joke={joke} />}
             </div>
         </div>

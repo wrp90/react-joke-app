@@ -5,6 +5,16 @@
     flex-direction: column;
 }
 
+@import url('https://fonts.googleapis.com/css2?family=Kablammo&family=Noto+Sans+JP:wght@200;300&family=Open+Sans:wght@400;500&display=swap');
+
 .title {
     margin-bottom: 16px;
+    font-family: 'Kablammo', cursive;
 }
+
+.joke-controls {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+  

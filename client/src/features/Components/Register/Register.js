@@ -53,7 +53,7 @@ const Register = () => {
                 <h2>Sign up</h2>
                 <Form onSubmit={e => submitRegistration(e)}>
                     <Form.Group className="mt-2">
-                        <Form.Label>First name</Form.Label>
+                        <Form.Label className="mt-3">First name</Form.Label>
                         <Form.Control
                             type="text"
                             placeholder="Enter First Name"
@@ -108,7 +108,7 @@ const Register = () => {
                             </Button>
                         </InputGroup>
                     </Form.Group>
-                    <Button variant="primary" className="mt-2" type="submit">
+                    <Button variant="primary" className="mt-3 d-flex align-items-center" type="submit">
                         Submit
                     </Button>
                 </Form>

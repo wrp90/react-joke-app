@@ -1,3 +1,5 @@
+import { Button, Form } from "react-bootstrap";
+
 const SearchBar = ({ onHandleSubmit }) => {
     
     
@@ -8,9 +10,13 @@ const SearchBar = ({ onHandleSubmit }) => {
 
     return (
         <div className="search">
-            <form className="joke-button-form" onSubmit={(event) => handleSubmit(event)}>
-                <input className="joke-button"type="submit" value="Joke"></input>
-            </form>
+            <Form className="joke-button-form" onSubmit={(event) => handleSubmit(event)}>
+                {/* <input className="joke-button"type="submit" value="Joke"></input> */}
+                <Button variant="primary" className="mt-2" value="Joke" type="submit">
+                    Joke
+                </Button>
+            </Form>
+            
         </div>
     )
 };
