@@ -8,25 +8,35 @@ import Login from './features/Components/Login/Login';
 import Register from './features/Components/Register/Register';
 import ProtectedRoute from './features/Components/ProtectedRoute/ProtectedRoute';
 import Logout from './features/Components/Logout/Logout';
+import AppContainer from './features/Components/AppContainer/AppContainer';
 import './App.css';
 
 
 function App() {
   const isLoggedIn = useSelector(selectIsLoggedIn);
+  console.log(isLoggedIn);
 
   return (
     <div className="App">
       <BrowserRouter>
         <Routes>
-          <Route path="/" element={<Home />} />
-          {!isLoggedIn && <Route path="/login" element={<Login />} />}
-          <Route path="/logout" element={<Logout />} />
-          {!isLoggedIn && <Route path="/register" element={<Register />} />}
-          <Route path="/dashboard" element={
-            <ProtectedRoute>
-              <Dashboard />
-            </ProtectedRoute>
-          } />
+          <Route element={<AppContainer />}>
+            <Route path="/" element={
+              <ProtectedRoute>
+                <Home />
+              </ProtectedRoute>} />
+            {!isLoggedIn && <Route path="/login" element={<Login />} />}
+            <Route path="/logout" element={<Logout />} />
+            {!isLoggedIn && <Route path="/register" element={<Register />} />}
+            <Route
+              path="/dashboard"
+              element={
+                <ProtectedRoute>
+                  <Dashboard />
+                </ProtectedRoute>
+              }
+            />
+          </Route>
         </Routes>
       </BrowserRouter>
     </div>

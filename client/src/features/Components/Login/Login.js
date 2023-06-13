@@ -3,7 +3,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { useState } from 'react';
 import { setIsLoggedIn, setUserInformation } from '../../../app/slices/userSlice';
-import NavElement from '../NavElement/NavElement';
+
 
 const Login = () => {
     const dispatch = useDispatch()
@@ -47,15 +47,14 @@ const Login = () => {
         };
 
         localStorage.setItem('token', data.token);
-        const { firstName, lastName, email, username } = data.user;
-        dispatch(setUserInformation({ firstName, lastName, email, username }));
+        const { firstName, lastName, email, userName } = data.user;
         dispatch(setIsLoggedIn(true));
+        dispatch(setUserInformation({ firstName, lastName, email, userName }));
         navigate('/');
     };
 
     return (
         <div>
-            <NavElement hideDropDown hideLogin />
             <Row className="login-container">
                 {message && <p>{message}</p>}
                 <h2 className="mb-2">Login</h2>

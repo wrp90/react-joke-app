@@ -2,7 +2,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import { selectCurrentJoke, setCurrentJoke } from '../../../app/slices/jokeSlice';
 import { Button, Dropdown, DropdownButton } from 'react-bootstrap';
 import { useState } from 'react';
-import NavbarElement from "../NavElement/NavElement";
 import JokeCard from '../JokeCard/JokeCard';
 import './Home.css';
 
@@ -30,7 +29,6 @@ const Home = () => {
 
     return (
         <div>
-            <NavbarElement setJokeType={setJokeType} />
             <div className="joke-card">
                 <h1 className="title">Joke Generator</h1>
                 <p>
@@ -70,6 +68,7 @@ const Home = () => {
                 {joke && <JokeCard joke={joke} />}
             </div>
         </div>
+        
     )
 };
 

@@ -1,6 +1,6 @@
 import { useSelector } from 'react-redux';
 import { selectIsLoggedIn } from '../../../app/slices/userSlice';
-import { Navigate } from 'react-router-dom';
+import { Navigate, Outlet } from 'react-router-dom';
 
 const ProtectedRoute = ({ children }) => {
   const isLoggedIn = useSelector(selectIsLoggedIn)
@@ -9,6 +9,7 @@ const ProtectedRoute = ({ children }) => {
   if (!isLoggedIn && !hasToken) {
     return <Navigate to="/login" replace={true} />;
   }
+  <Outlet />
 
   return children;
 }

@@ -3,7 +3,6 @@ import { setIsLoggedIn, setUserInformation } from '../../../app/slices/userSlice
 import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { useState } from 'react';
-import NavElement from '../NavElement/NavElement';
 
 const Register = () => {
     const dispatch = useDispatch()
@@ -40,15 +39,14 @@ const Register = () => {
 
         const data = await newUser.json();
 
-        const { firstName, lastName, email, username } = data;
-        dispatch(setUserInformation({ ...firstName, lastName, email, username }));
+        const { firstName, lastName, email, userName } = data;
+        dispatch(setUserInformation({ firstName, lastName, email, userName }));
         dispatch(setIsLoggedIn(true));
-        navigate('/login');
+        navigate('/');
     };
 
     return (
         <div>
-            <NavElement hideDropDown />
             <Row className="register-container">
                 <h2>Sign up</h2>
                 <Form onSubmit={e => submitRegistration(e)}>
