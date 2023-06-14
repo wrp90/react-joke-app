@@ -2,7 +2,9 @@ const http = require('http');
 const express = require('express');
 const bcrypt = require('bcrypt');
 const cors = require('cors');
-const { User } = require('./models');
+const jwt = require('jsonwebtoken');
+const { User, Joke } = require('./models');
+require('dotenv').config();
 
 const hostname = '127.0.0.1';
 const port = 3001;
@@ -16,7 +18,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(cors({ origin: (orig, cb) => cb(null, true), credentials: true }));
 
 app.post('/users', async (req, res) => {
-    console.log("req.body:", req.body)
+    console.log("req.body users:", req.body)
     const { firstName, lastName, userName, email, password } = req.body;
     const user = await User.findOne({
         where: {
@@ -41,7 +43,7 @@ app.post('/users', async (req, res) => {
 });
 
 app.post('/login', async (req, res) => {
-    console.log("req.body:", req.body)
+    console.log("req.body login:", req.body)
     const user = await User.findOne({
         where: {
             email: req.body.email
@@ -53,7 +55,14 @@ app.post('/login', async (req, res) => {
             user.password
         )
         if (auth) {
-            res.send(user);
+            const token = jwt.sign(
+                { userId: user.id, email: user.email },
+                process.env.JWT_SECRET,
+                {
+                    expiresIn: '1h',
+                }
+            );
+            res.send({ token, user });
         } else {
             res.status(401).send({
                 message: "Invalid password"
@@ -64,7 +73,63 @@ app.post('/login', async (req, res) => {
             message: "No user found"
         })
     }
-})
+});
+
+app.post('/jokes', async (req, res) => {
+    console.log("req.body jokes:", req.body)
+    const { joke, userId, catagory } = req.body;
+    const savedJoke = await Joke.create({
+        joke,
+        userId,
+        catagory,
+    });
+    res.send(savedJoke);
+});
+
+app.get('/user/:token', async (req, res) => {
+    const decodedToken = req.params.token;
+    console.log('decoded token:', decodedToken)
+    jwt.verify(decodedToken, process.env.JWT_SECRET, async (error, decoded) => {
+        if (error) {
+            console.log(error);
+        } else {
+            const user = await User.findOne({
+                where: {
+                    id: decoded.userId
+                }
+            });
+            console.log('user:', user)
+            res.send(user);
+        }
+    })
+});
+
+//Get fav joke 
+////const favJoke = await Joke.findAll ({
+//     where: {
+//         userId: req.params.userId
+//     }
+// })
+
+// app.get('/user/:token', async (req, res) => {
+//     const decodedToken = req.params.token;
+//     console.log('decoded token:', decodedToken)
+//     jwt.verify(decodedToken, process.env.JWT_SECRET, async (error, decoded) => {
+//         if (error) {
+//             console.log(error);
+//         } else {
+//             const user = await User.findOne({
+//                 where: {
+//                     id: decoded.userId
+//                 }
+//             });
+//             console.log('user:', user)
+//         }
+//         res.send(user);
+//     })
+// });
+
+
 
 server.listen(port, hostname, () => {
     console.log(`Server running at http://${hostname}:${port}/`);

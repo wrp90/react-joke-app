@@ -1,15 +1,45 @@
-import { useSelector } from 'react-redux';
-import { Link, Outlet } from 'react-router-dom';
-import { selectIsLoggedIn } from '../../../app/slices/userSlice';
+import { useDispatch, useSelector } from 'react-redux';
+import { Link, Outlet, useNavigate } from 'react-router-dom';
+import { selectIsLoggedIn, setIsLoggedIn, setUserId, setUserInformation } from '../../../app/slices/userSlice';
 import { Container, Nav } from 'react-bootstrap';
+import { useEffect } from 'react';
 import Navbar from 'react-bootstrap/Navbar';
 
 const AppContainer = ({ hideLogin }) => {
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
+
     const isLoggedIn = useSelector(selectIsLoggedIn);
-    const hasToken = !!localStorage.getItem('token');
+    const token = localStorage.getItem('token');
+    const hasToken = !!token;
+
+    const fetchUserData = async () => {
+        const url = `http://localhost:3001/user/${token}`;
+        const newUser = await fetch(url, {
+            method: "GET",
+            headers: {
+                "Content-Type": "application/json"
+            }
+        });
+
+        const data = await newUser.json();
+        console.log("New User Token Data:", data);
+
+        const { firstName, lastName, email, userName, id } = data;
+        dispatch(setIsLoggedIn(true));
+        dispatch(setUserId(id));
+        dispatch(setUserInformation({ firstName, lastName, email, userName }));
+        navigate('/');
+    }
+
+    useEffect(() => {
+        if (hasToken) {
+            fetchUserData();
+        }
+    }, [hasToken])
 
     const renderLinks = () => {
-        if (!isLoggedIn && !hasToken) {
+        if (!isLoggedIn) {
             return (
                 <div className="d-flex align-items-center">
                     <Link className="navbar-brand me-3" to="/register">
@@ -22,7 +52,7 @@ const AppContainer = ({ hideLogin }) => {
             );
         };
 
-        if (isLoggedIn || hasToken) {
+        if (isLoggedIn) {
             return (
                 <>
                     <Link
@@ -32,9 +62,9 @@ const AppContainer = ({ hideLogin }) => {
                     </Link>
                     <Link
                         className="navbar-brand"
-                        to={isLoggedIn || hasToken ? '/logout' : '/login'}
+                        to={isLoggedIn ? '/logout' : '/login'}
                     >
-                        {isLoggedIn || hasToken ? 'Log Out' : 'Log In'}
+                        {isLoggedIn ? 'Log Out' : 'Log In'}
                     </Link>
                 </>
             );

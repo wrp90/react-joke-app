@@ -23,4 +23,6 @@ export const { setCurrentJoke, setFavoriteJoke } = jokesSlice.actions;
 
 export const selectCurrentJoke = (state) => state.jokes.currentJoke;
 
+export const selectFavoriteJoke = (state) => state.jokes.favoriteJokes;
+
 export default jokesSlice.reducer;

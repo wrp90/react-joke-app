@@ -1,13 +1,21 @@
 import { Form, Button, Row, InputGroup } from 'react-bootstrap';
 import { Link, useNavigate } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
-import { useState } from 'react';
-import { setIsLoggedIn, setUserInformation } from '../../../app/slices/userSlice';
+import { useDispatch, useSelector } from 'react-redux';
+import { useEffect, useState } from 'react';
+import {
+    selectIsLoggedIn,
+    setIsLoggedIn,
+    setUserId,
+    setUserInformation
+}
+    from '../../../app/slices/userSlice';
 
 
 const Login = () => {
     const dispatch = useDispatch()
     const navigate = useNavigate();
+
+    const isLoggedIn = useSelector(selectIsLoggedIn);
 
     const [showPassword, setShowPassword] = useState(false);
     const [password, setPassword] = useState('');
@@ -46,12 +54,19 @@ const Login = () => {
             return setMessage(data.message);
         };
 
+        ///get favjokes from backend
+
         localStorage.setItem('token', data.token);
-        const { firstName, lastName, email, userName } = data.user;
+        const { firstName, lastName, email, userName, id } = data.user;
         dispatch(setIsLoggedIn(true));
+        dispatch(setUserId(id));
         dispatch(setUserInformation({ firstName, lastName, email, userName }));
         navigate('/');
     };
+
+    useEffect(() => {
+        if (isLoggedIn) return navigate('/')
+    }, [isLoggedIn]);
 
     return (
         <div>
