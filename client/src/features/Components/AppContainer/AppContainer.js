@@ -23,6 +23,11 @@ const AppContainer = ({ hideLogin }) => {
         });
 
         const data = await newUser.json();
+        if (data.message) {
+            navigate("/logout");
+            return;
+        }
+        
         console.log("New User Token Data:", data);
 
         const { firstName, lastName, email, userName, id } = data;
@@ -36,7 +41,7 @@ const AppContainer = ({ hideLogin }) => {
         if (hasToken) {
             fetchUserData();
         }
-    }, [hasToken])
+    },[hasToken])
 
     const renderLinks = () => {
         if (!isLoggedIn) {

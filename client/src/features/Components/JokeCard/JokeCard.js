@@ -16,7 +16,7 @@ const JokeCard = ({ joke }) => {
   const jokeBody = {
     userId: id,
     joke: joke.joke,
-    catagory: joke.category
+    category: joke.category
   };
 
   const saveJoke = async (event) => {

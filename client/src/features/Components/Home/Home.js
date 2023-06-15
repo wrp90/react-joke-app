@@ -32,13 +32,13 @@ const Home = () => {
             <div className="joke-card">
                 <h1 className="title">Joke Generator</h1>
                 <p>
-                    Welcome to my joke site!  Please select a joke type then hit the joke button!
+                    Welcome to my joke site!  Please select a joke type then hit the joke button to generate a joke!
                 </p>
                 <div className="joke-controls">
                     <DropdownButton
                         variant="info"
                         id="dropdown-basic-button"
-                        title="Dropdown button"
+                        title="Select Joke Type"
                         className="me-2"
                     >
                         <Dropdown.Item onClick={() => setJokeType('Any')}>

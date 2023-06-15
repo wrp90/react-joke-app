@@ -7,8 +7,7 @@ import {
     setIsLoggedIn,
     setUserId,
     setUserInformation
-}
-    from '../../../app/slices/userSlice';
+} from '../../../app/slices/userSlice';
 
 
 const Login = () => {
