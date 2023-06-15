@@ -2,7 +2,7 @@ import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { setIsLoggedIn, setUserId } from '../../../app/slices/userSlice';
-import { setCurrentJoke, setFavoriteJoke } from '../../../app/slices/jokeSlice';
+import { resetJokeSlice, setCurrentJoke } from '../../../app/slices/jokeSlice';
 
 function Logout() {
   const navigate = useNavigate();
@@ -11,7 +11,7 @@ function Logout() {
   const resetStore = () => {
     dispatch(setIsLoggedIn(false));
     dispatch(setUserId(null));
-    dispatch(setFavoriteJoke([]));
+    dispatch(resetJokeSlice());
     dispatch(setCurrentJoke(''));
   }
 

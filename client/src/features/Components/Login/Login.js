@@ -8,6 +8,7 @@ import {
     setUserId,
     setUserInformation
 } from '../../../app/slices/userSlice';
+import { setFavoriteJokes } from '../../../app/slices/jokeSlice';
 
 
 const Login = () => {
@@ -54,7 +55,16 @@ const Login = () => {
         };
 
         ///get favjokes from backend
+        const favJoke = await fetch(`http://localhost:3001/jokes/${data.user.id}`, {
+            method: "GET",
+            headers: {
+                "Content-Type": "application/json"
+            }
+        });
 
+        const jokes = await favJoke.json();
+        dispatch(setFavoriteJokes(jokes))
+        
         localStorage.setItem('token', data.token);
         const { firstName, lastName, email, userName, id } = data.user;
         dispatch(setIsLoggedIn(true));

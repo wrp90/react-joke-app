@@ -9,6 +9,7 @@ import './Home.css';
 const Home = () => {
     const dispatch = useDispatch();
     const [jokeType, setJokeType] = useState('');
+    const [buttonText, setButtonText] = useState('Save Joke');
     const initAPI = async () => {
         const userResponse = await fetch(
             `https://v2.jokeapi.dev/joke/${jokeType}?blacklistFlags=racist&type=single`
@@ -23,6 +24,7 @@ const Home = () => {
         // };
         console.log(response);
         dispatch(setCurrentJoke(response));
+        setButtonText('Save Joke');
     };
 
     const joke = useSelector(selectCurrentJoke);
@@ -65,7 +67,7 @@ const Home = () => {
                         Joke
                     </Button>
                 </div>
-                {joke && <JokeCard joke={joke} />}
+                {joke && <JokeCard buttonText={buttonText} setButtonText={setButtonText} joke={joke} />}
             </div>
         </div>
         

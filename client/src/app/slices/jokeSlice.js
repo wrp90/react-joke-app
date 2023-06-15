@@ -3,7 +3,7 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
     currentJoke: '',
-    favoriteJokes: [ ],
+    favoriteJokes: [],
 };
 
 export const jokesSlice = createSlice({
@@ -13,13 +13,19 @@ export const jokesSlice = createSlice({
         setCurrentJoke: (state, action) => {
             state.currentJoke = action.payload;
         },
-        setFavoriteJoke: (state, action) => {
+        addFavoriteJoke: (state, action) => {
             state.favoriteJokes = [...state.favoriteJokes, action.payload]
         },
+        resetJokeSlice: (state, action) => {
+            state=initialState;
+        },
+        setFavoriteJokes: (state, action) => {
+            state.favoriteJokes = action.payload;
+        }
     },
 });
 
-export const { setCurrentJoke, setFavoriteJoke } = jokesSlice.actions;
+export const { setCurrentJoke, addFavoriteJoke, resetJokeSlice, setFavoriteJokes } = jokesSlice.actions;
 
 export const selectCurrentJoke = (state) => state.jokes.currentJoke;
 

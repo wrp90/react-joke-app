@@ -1,14 +1,13 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { selectIsLoggedIn, selectUserId } from '../../../app/slices/userSlice';
-import { setFavoriteJoke } from '../../../app/slices/jokeSlice';
+import { addFavoriteJoke } from '../../../app/slices/jokeSlice';
 import { useState } from 'react';
 import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
 
-const JokeCard = ({ joke }) => {
+const JokeCard = ({ joke, setButtonText, buttonText, showButton=true }) => {
   const dispatch = useDispatch();
 
-  const [buttonText, setButtonText] = useState('Save Joke');
 
   const isLoggedIn = useSelector(selectIsLoggedIn);
   const id = useSelector(selectUserId);
@@ -34,10 +33,11 @@ const JokeCard = ({ joke }) => {
     const data = await newJoke.json();
     console.log("New Joke Data:", data);
 
-    dispatch(setFavoriteJoke(data));
+    dispatch(addFavoriteJoke(data));
     setButtonText('Saved');
   };
-
+  
+  
   return (
     <>
       <Card border="primary" style={{ width: '18rem', marginTop: '32px' }}>
@@ -46,7 +46,7 @@ const JokeCard = ({ joke }) => {
           <Card.Text>
             {joke.joke}
           </Card.Text>
-          {isLoggedIn && <Button disabled={buttonText === 'Saved'} onClick={e => saveJoke(e)}>
+          {isLoggedIn && showButton && <Button disabled={buttonText === 'Saved'} onClick={e => saveJoke(e)}>
             {buttonText}
           </Button>}
         </Card.Body>
