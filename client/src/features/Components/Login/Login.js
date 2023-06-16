@@ -54,7 +54,7 @@ const Login = () => {
             return setMessage(data.message);
         };
 
-        ///get favjokes from backend
+        if (!data.user.id) return 
         const favJoke = await fetch(`http://localhost:3001/jokes/${data.user.id}`, {
             method: "GET",
             headers: {

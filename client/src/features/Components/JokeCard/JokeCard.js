@@ -1,11 +1,11 @@
 import { useDispatch, useSelector } from 'react-redux';
+import { TwitterShareButton, TwitterIcon } from 'react-share'
 import { selectIsLoggedIn, selectUserId } from '../../../app/slices/userSlice';
 import { addFavoriteJoke } from '../../../app/slices/jokeSlice';
-import { useState } from 'react';
 import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
 
-const JokeCard = ({ joke, setButtonText, buttonText, showButton=true }) => {
+const JokeCard = ({ joke, setButtonText, buttonText, showButton=true, showTwitterButton=false }) => {
   const dispatch = useDispatch();
 
 
@@ -36,6 +36,7 @@ const JokeCard = ({ joke, setButtonText, buttonText, showButton=true }) => {
     dispatch(addFavoriteJoke(data));
     setButtonText('Saved');
   };
+
   
   
   return (
@@ -49,6 +50,12 @@ const JokeCard = ({ joke, setButtonText, buttonText, showButton=true }) => {
           {isLoggedIn && showButton && <Button disabled={buttonText === 'Saved'} onClick={e => saveJoke(e)}>
             {buttonText}
           </Button>}
+          {/* {showTwitterButton && <Button  onClick={'save to twitter'}>
+            Post to twitter
+          </Button>} */}
+          {showTwitterButton && <TwitterShareButton url={joke.joke}>
+            <TwitterIcon style={{height: '36px'}}/>
+          </TwitterShareButton>}
         </Card.Body>
       </Card>
     </>

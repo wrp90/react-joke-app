@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from 'react-redux';
-import { Link, Outlet, useNavigate } from 'react-router-dom';
+import { Link, Outlet, useNavigate, useLocation } from 'react-router-dom';
 import { selectIsLoggedIn, setIsLoggedIn, setUserId, setUserInformation } from '../../../app/slices/userSlice';
 import { Container, Nav } from 'react-bootstrap';
 import { useEffect } from 'react';
@@ -9,11 +9,13 @@ const AppContainer = ({ hideLogin }) => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
+    let location = useLocation();
+
     const isLoggedIn = useSelector(selectIsLoggedIn);
     const token = localStorage.getItem('token');
     const hasToken = !!token;
 
-    const fetchUserData = async () => {
+    const fetchUserData = async (event) => {
         const url = `http://localhost:3001/user/${token}`;
         const newUser = await fetch(url, {
             method: "GET",
@@ -26,15 +28,14 @@ const AppContainer = ({ hideLogin }) => {
         if (data.message) {
             navigate("/logout");
             return;
-        }
-        
+        };
         console.log("New User Token Data:", data);
 
         const { firstName, lastName, email, userName, id } = data;
         dispatch(setIsLoggedIn(true));
         dispatch(setUserId(id));
         dispatch(setUserInformation({ firstName, lastName, email, userName }));
-        navigate('/');
+        navigate({location});
     }
 
     useEffect(() => {
