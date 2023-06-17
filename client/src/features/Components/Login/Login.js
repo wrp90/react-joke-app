@@ -48,7 +48,6 @@ const Login = () => {
         });
 
         const data = await newUser.json();
-        console.log("New User Data:", data);
 
         if (data.message) {
             return setMessage(data.message);

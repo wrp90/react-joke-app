@@ -29,7 +29,6 @@ const AppContainer = ({ hideLogin }) => {
             navigate("/logout");
             return;
         };
-        console.log("New User Token Data:", data);
 
         const { firstName, lastName, email, userName, id } = data;
         dispatch(setIsLoggedIn(true));

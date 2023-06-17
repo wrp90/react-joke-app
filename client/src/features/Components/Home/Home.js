@@ -15,14 +15,6 @@ const Home = () => {
             `https://v2.jokeapi.dev/joke/${jokeType}?blacklistFlags=racist&type=single`
         );
         const response = await userResponse.json();
-        // if (response.error === true) {
-        //     setSearchError(response.error);
-        // } else {
-        //     if (searchError) {
-        //         setSearchError('')
-        //     }
-        // };
-        console.log(response);
         dispatch(setCurrentJoke(response));
         setButtonText('Save Joke');
     };

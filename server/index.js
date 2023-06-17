@@ -18,7 +18,6 @@ app.use(express.urlencoded({ extended: true }));
 app.use(cors({ origin: (orig, cb) => cb(null, true), credentials: true }));
 
 app.post('/users', async (req, res) => {
-    console.log("req.body users:", req.body)
     const { firstName, lastName, userName, email, password } = req.body;
     const user = await User.findOne({
         where: {
@@ -43,7 +42,6 @@ app.post('/users', async (req, res) => {
 });
 
 app.post('/login', async (req, res) => {
-    console.log("req.body login:", req.body)
     const user = await User.findOne({
         where: {
             email: req.body.email
@@ -76,7 +74,6 @@ app.post('/login', async (req, res) => {
 });
 
 app.post('/jokes', async (req, res) => {
-    console.log("req.body jokes:", req.body)
     const { joke, userId, category } = req.body;
     const savedJoke = await Joke.create({
         joke,
@@ -119,7 +116,6 @@ app.get('/jokes/:userId', async (req, res) => {
 
 app.delete('/jokes/:id', async (req, res) => {
     const { id } = req.params;
-    console.log(id)
     try {
         
         const joke = await Joke.findByPk(id);
