@@ -13,7 +13,7 @@ module.exports = (sequelize, DataTypes) => {
   }
   Joke.init({
     userId: DataTypes.INTEGER,
-    catagory: DataTypes.STRING,
+    category: DataTypes.STRING,
     joke: DataTypes.TEXT
   }, {
     sequelize,

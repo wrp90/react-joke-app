@@ -18,7 +18,7 @@ module.exports = {
                 as: 'userId'
         }
       },
-      catagory: {
+      category: {
         type: Sequelize.STRING
       },
       joke: {

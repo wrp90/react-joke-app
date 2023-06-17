@@ -59,7 +59,7 @@ app.post('/login', async (req, res) => {
                 { userId: user.id, email: user.email },
                 process.env.JWT_SECRET,
                 {
-                    expiresIn: '1h',
+                    expiresIn: '1hr',
                 }
             );
             res.send({ token, user });
@@ -77,59 +77,63 @@ app.post('/login', async (req, res) => {
 
 app.post('/jokes', async (req, res) => {
     console.log("req.body jokes:", req.body)
-    const { joke, userId, catagory } = req.body;
+    const { joke, userId, category } = req.body;
     const savedJoke = await Joke.create({
         joke,
         userId,
-        catagory,
+        category,
     });
     res.send(savedJoke);
 });
 
 app.get('/user/:token', async (req, res) => {
-    const decodedToken = req.params.token;
-    console.log('decoded token:', decodedToken)
-    jwt.verify(decodedToken, process.env.JWT_SECRET, async (error, decoded) => {
-        if (error) {
-            console.log(error);
-        } else {
-            const user = await User.findOne({
-                where: {
-                    id: decoded.userId
-                }
-            });
-            console.log('user:', user)
-            res.send(user);
-        }
-    })
+    try {
+        const decodedToken = req.params.token;
+        jwt.verify(decodedToken, process.env.JWT_SECRET, async (error, decoded) => {
+            if (error) {
+                console.error(error);
+                res.status(401).send({ message: "Invalid Token" });
+            } else {
+                const user = await User.findOne({
+                    where: {
+                        id: decoded.userId
+                    }
+                });
+                res.send(user);
+            }
+        });
+    } catch (error) {
+        console.error(error);
+        res.status(500).send({ message: "Internal Server Error" });
+    }
 });
 
-//Get fav joke 
-////const favJoke = await Joke.findAll ({
-//     where: {
-//         userId: req.params.userId
-//     }
-// })
+app.get('/jokes/:userId', async (req, res) => {
+    const favJoke = await Joke.findAll({
+        where: {
+            userId: req.params.userId
+        }
+    });
+    res.send(favJoke);
+});
 
-// app.get('/user/:token', async (req, res) => {
-//     const decodedToken = req.params.token;
-//     console.log('decoded token:', decodedToken)
-//     jwt.verify(decodedToken, process.env.JWT_SECRET, async (error, decoded) => {
-//         if (error) {
-//             console.log(error);
-//         } else {
-//             const user = await User.findOne({
-//                 where: {
-//                     id: decoded.userId
-//                 }
-//             });
-//             console.log('user:', user)
-//         }
-//         res.send(user);
-//     })
-// });
-
-
+app.delete('/jokes/:id', async (req, res) => {
+    const { id } = req.params;
+    console.log(id)
+    try {
+        
+        const joke = await Joke.findByPk(id);
+        
+        if (!joke) {
+            res.status(404).json({ error: 'Joke not found' });
+        } else {
+            await joke.destroy();
+            res.status(204).send(); 
+        }
+    } catch (error) {
+        res.status(500).json({ error: 'Internal server error' });
+    }
+});
 
 server.listen(port, hostname, () => {
     console.log(`Server running at http://${hostname}:${port}/`);
