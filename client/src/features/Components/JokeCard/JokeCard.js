@@ -1,17 +1,16 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { TwitterShareButton, TwitterIcon } from 'react-share'
 import { selectIsLoggedIn, selectUserId } from '../../../app/slices/userSlice';
-import { addFavoriteJoke, selectJokeId } from '../../../app/slices/jokeSlice';
+import { addFavoriteJoke, deleteFavoriteJoke } from '../../../app/slices/jokeSlice';
 import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
 
-const JokeCard = ({ joke, setButtonText, buttonText, showButton = true, showTwitterButton = false }) => {
+const JokeCard = ({ joke, setButtonText, buttonText, showButton=true, showTwitterButton=false, showDeleteButton=false }) => {
   const dispatch = useDispatch();
 
-  const jokeId = useSelector(selectJokeId);
+  // const jokeId = useSelector(selectJokeId);
   const isLoggedIn = useSelector(selectIsLoggedIn);
   const id = useSelector(selectUserId);
-
 
   const jokeBody = {
     userId: id,
@@ -41,7 +40,7 @@ const JokeCard = ({ joke, setButtonText, buttonText, showButton = true, showTwit
     event.preventDefault();
 
     try {
-      const response = await fetch(`http://localhost:3001/jokes/${jokeId}`, {
+      const response = await fetch(`http://localhost:3001/jokes/${joke.id}`, {
         method: "DELETE",
         headers: {
           "Content-Type": "application/json"
@@ -49,6 +48,7 @@ const JokeCard = ({ joke, setButtonText, buttonText, showButton = true, showTwit
       });
 
       if (response.ok) {
+        dispatch(deleteFavoriteJoke(joke.id));
         console.log("Joke deleted successfully");
       } else {
         console.error("Error deleting joke:", response.status);
@@ -58,9 +58,6 @@ const JokeCard = ({ joke, setButtonText, buttonText, showButton = true, showTwit
     }
   };
 
-
-
-
   return (
     <>
       <Card border="primary" style={{ width: '18rem', marginTop: '32px' }}>
@@ -69,15 +66,19 @@ const JokeCard = ({ joke, setButtonText, buttonText, showButton = true, showTwit
           <Card.Text>
             {joke.joke}
           </Card.Text>
-          {isLoggedIn && showButton && <Button disabled={buttonText === 'Saved'} onClick={e => saveJoke(e)}>
-            {buttonText}
-          </Button>}
-          <Button onClick={deleteJoke}>
+          {isLoggedIn && showButton && (
+            <Button disabled={buttonText === 'Saved'} onClick={saveJoke}>
+              {buttonText}
+            </Button>
+          )}
+          {showDeleteButton && <Button onClick={deleteJoke}>
             Delete
-          </Button>
-          {showTwitterButton && <TwitterShareButton url={joke.joke}>
-            <TwitterIcon style={{ height: '36px' }} />
-          </TwitterShareButton>}
+          </Button>}
+          {showTwitterButton && (
+            <TwitterShareButton url={joke.joke}>
+              <TwitterIcon style={{ height: '36px' }} />
+            </TwitterShareButton>
+          )}
         </Card.Body>
       </Card>
     </>

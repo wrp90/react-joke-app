@@ -2,7 +2,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Link, Outlet, useNavigate, useLocation } from 'react-router-dom';
 import { selectIsLoggedIn, setIsLoggedIn, setUserId, setUserInformation } from '../../../app/slices/userSlice';
 import { Container, Nav } from 'react-bootstrap';
-import { useEffect } from 'react';
+import { useCallback, useEffect } from 'react';
 import Navbar from 'react-bootstrap/Navbar';
 
 const AppContainer = ({ hideLogin }) => {
@@ -15,7 +15,7 @@ const AppContainer = ({ hideLogin }) => {
     const token = localStorage.getItem('token');
     const hasToken = !!token;
 
-    const fetchUserData = async (event) => {
+    const fetchUserData = useCallback(async () => {
         const url = `http://localhost:3001/user/${token}`;
         const newUser = await fetch(url, {
             method: "GET",
@@ -35,11 +35,12 @@ const AppContainer = ({ hideLogin }) => {
         dispatch(setUserId(id));
         dispatch(setUserInformation({ firstName, lastName, email, userName }));
         navigate({location});
-    }
+    }, [dispatch, navigate, location, token]) 
 
     useEffect(() => {
         if (hasToken) {
             fetchUserData();
+            return;
         }
     },[hasToken])
 

@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useCallback, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { setIsLoggedIn, setUserId } from '../../../app/slices/userSlice';
@@ -8,12 +8,12 @@ function Logout() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  const resetStore = () => {
+  const resetStore = useCallback(() => {
     dispatch(setIsLoggedIn(false));
     dispatch(setUserId(null));
     dispatch(resetJokeSlice());
     dispatch(setCurrentJoke(''));
-  }
+  },[dispatch]);
 
   useEffect(() => {
     resetStore();

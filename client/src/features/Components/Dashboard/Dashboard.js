@@ -30,7 +30,9 @@ const Dashboard = () => {
     useEffect(() => {
         if (!isLoggedIn) return navigate('/login');
         getJokes();
-    }, [isLoggedIn, getJokes, navigate]);
+        return;
+    }, [isLoggedIn]);
+    
 
     if (isLoggedIn) {
         return (
@@ -38,7 +40,7 @@ const Dashboard = () => {
                 <h1>Hello {userInformation.firstName}!</h1>
                 <div className="favorite-joke-container">
                     {jokes.map((joke, index) => {
-                        return <JokeCard showTwitterButton showButton={false} joke={joke} key={index} />
+                        return <JokeCard showDeleteButton showTwitterButton showButton={false} joke={joke} key={index} />
                     })}
                 </div>
             </div>
