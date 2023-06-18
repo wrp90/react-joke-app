@@ -19,7 +19,7 @@ function Logout() {
     resetStore();
     localStorage.removeItem('token');
     navigate('/login');
-  }, []);
+  }, [navigate, resetStore]);
 }
 
 export default Logout;

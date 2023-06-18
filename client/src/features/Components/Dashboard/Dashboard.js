@@ -26,12 +26,12 @@ const Dashboard = () => {
         const jokes = await favJoke.json();
         dispatch(setFavoriteJokes(jokes));
     }, [dispatch, id]);
-    
+
     useEffect(() => {
         if (!isLoggedIn) return navigate('/login');
         getJokes();
         return;
-    }, [isLoggedIn]);
+    }, [isLoggedIn, getJokes, navigate]);
     
 
     if (isLoggedIn) {

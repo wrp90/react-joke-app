@@ -15,7 +15,7 @@ const AppContainer = ({ hideLogin }) => {
     const token = localStorage.getItem('token');
     const hasToken = !!token;
 
-    const fetchUserData = useCallback(async () => {
+    const fetchUserData = useCallback(async (event) => {
         const url = `http://localhost:3001/user/${token}`;
         const newUser = await fetch(url, {
             method: "GET",

@@ -67,18 +67,18 @@ const JokeCard = ({ joke, setButtonText, buttonText, showButton=true, showTwitte
             {joke.joke}
           </Card.Text>
           {isLoggedIn && showButton && (
-            <Button disabled={buttonText === 'Saved'} onClick={saveJoke}>
+            <Button variant="success" disabled={buttonText === 'Saved'} onClick={saveJoke}>
               {buttonText}
             </Button>
           )}
-          {showDeleteButton && <Button onClick={deleteJoke}>
-            Delete
-          </Button>}
           {showTwitterButton && (
             <TwitterShareButton url={joke.joke}>
               <TwitterIcon style={{ height: '36px' }} />
             </TwitterShareButton>
           )}
+          {showDeleteButton && <Button variant="danger" onClick={deleteJoke}>
+            Delete
+          </Button>}
         </Card.Body>
       </Card>
     </>
