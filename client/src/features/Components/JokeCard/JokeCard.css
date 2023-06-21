@@ -1,0 +1,13 @@
+.jokeCard {
+    width: 18rem;
+    height: 24rem;
+    margin-top: 32px;
+    display: flex;
+    flex-direction: column;
+}
+
+.joke-card-body {
+    flex: 1 0 auto;
+}
+  
+  

@@ -1,0 +1,19 @@
+{
+  "dependencies": {
+    "concurrently": "^8.2.0"
+  },
+  "name": "react-joke-app",
+  "description": "",
+  "version": "1.0.0",
+  "main": "index.js",
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "setup": "npm i; cd server && npm i; cd ../client && npm i; npm run build",
+    "dev": "concurrently \"cd server && npm run dev\" \"cd client && npm start\"",
+    "start": "cd server && npm start"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}

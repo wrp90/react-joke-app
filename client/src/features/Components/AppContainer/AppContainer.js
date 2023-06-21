@@ -42,6 +42,7 @@ const AppContainer = ({ hideLogin }) => {
             fetchUserData();
             return;
         }
+        // eslint-disable-next-line
     },[hasToken])
 
     const renderLinks = () => {
