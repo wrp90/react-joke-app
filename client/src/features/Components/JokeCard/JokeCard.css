@@ -9,5 +9,11 @@
 .joke-card-body {
     flex: 1 0 auto;
 }
+
+.save-button {
+    background-color: #4ECFD1 !important;
+    border-color: #4ECFD1 !important;
+    color: black !important;
+}
   
   

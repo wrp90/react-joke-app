@@ -1,14 +1,11 @@
 import { Form, Button, Row, InputGroup } from 'react-bootstrap';
-// import { setIsLoggedIn, setUserInformation } from '../../../app/slices/userSlice';
 import { useNavigate } from 'react-router-dom';
-// import { useDispatch } from 'react-redux';
 import { useState } from 'react';
 import './Register.css';
 
 const baseUrl = process.env.REACT_APP_BASE_URL;
 
 const Register = () => {
-    // const dispatch = useDispatch()
     const navigate = useNavigate();
     const [showPassword, setShowPassword] = useState(false);
     const [password, setPassword] = useState('');
@@ -27,7 +24,7 @@ const Register = () => {
     const onPasswordEntry = (event) => {
         setUser({ ...user, password: event.target.value })
         setPassword(event.target.value);
-    }
+    };
 
     const submitRegistration = async (event) => {
         event.preventDefault();
@@ -39,11 +36,6 @@ const Register = () => {
                 "Content-Type": "application/json"
             }
         });
-
-
-        // const { firstName, lastName, email, userName } = data;
-        // dispatch(setUserInformation({ firstName, lastName, email, userName }));
-        // dispatch(setIsLoggedIn(true));
         navigate('/login');
     };
 

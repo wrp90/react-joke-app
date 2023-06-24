@@ -117,9 +117,7 @@ app.get('/jokes/:userId', async (req, res) => {
 app.delete('/jokes/:id', async (req, res) => {
     const { id } = req.params;
     try {
-        
         const joke = await Joke.findByPk(id);
-        
         if (!joke) {
             res.status(404).json({ error: 'Joke not found' });
         } else {
@@ -128,7 +126,7 @@ app.delete('/jokes/:id', async (req, res) => {
         }
     } catch (error) {
         res.status(500).json({ error: 'Internal server error' });
-    }
+    };
 });
 
 server.listen(port, hostname, () => {

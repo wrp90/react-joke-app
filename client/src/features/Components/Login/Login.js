@@ -13,7 +13,6 @@ import './Login.css';
 
 const baseUrl = process.env.REACT_APP_BASE_URL;
 
-
 const Login = () => {
     const dispatch = useDispatch()
     const navigate = useNavigate();
@@ -37,7 +36,6 @@ const Login = () => {
     const togglePasswordVisibility = () => {
         setShowPassword(!showPassword);
     };
-
 
     const submitLogin = async (event) => {
         event.preventDefault();
@@ -64,7 +62,7 @@ const Login = () => {
         });
 
         const jokes = await favJoke.json();
-        dispatch(setFavoriteJokes(jokes))
+        dispatch(setFavoriteJokes(jokes));
         
         localStorage.setItem('token', data.token);
         const { firstName, lastName, email, userName, id } = data.user;

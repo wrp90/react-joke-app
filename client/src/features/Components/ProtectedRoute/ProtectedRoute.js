@@ -3,7 +3,7 @@ import { selectIsLoggedIn } from '../../../app/slices/userSlice';
 import { Navigate, Outlet } from 'react-router-dom';
 
 const ProtectedRoute = ({ children }) => {
-  const isLoggedIn = useSelector(selectIsLoggedIn)
+  const isLoggedIn = useSelector(selectIsLoggedIn);
   const hasToken = !!localStorage.getItem('token');
 
   if (!isLoggedIn && !hasToken) {

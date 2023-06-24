@@ -66,7 +66,7 @@ const JokeCard = ({ joke, setButtonText, buttonText, showButton = true, showTwit
       </Card.Body>
       <Card.Footer>
         {isLoggedIn && showButton && (
-          <Button variant="success" disabled={buttonText === 'Saved'} onClick={saveJoke}>
+          <Button className="save-button" disabled={buttonText === 'Saved'} onClick={saveJoke}>
             {buttonText}
           </Button>
         )}

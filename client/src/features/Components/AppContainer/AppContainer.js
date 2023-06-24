@@ -38,15 +38,15 @@ const AppContainer = ({ hideLogin }) => {
         dispatch(setUserId(id));
         dispatch(setUserInformation({ firstName, lastName, email, userName }));
         navigate({location});
-    }, [dispatch, navigate, location, token]) 
+    }, [dispatch, navigate, location, token]); 
 
     useEffect(() => {
         if (hasToken) {
             fetchUserData();
             return;
-        }
+        };
         // eslint-disable-next-line
-    },[hasToken])
+    },[hasToken]);
 
     const renderLinks = () => {
         if (!isLoggedIn) {

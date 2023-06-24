@@ -16,7 +16,6 @@ const Dashboard = () => {
     const jokes = useSelector(selectFavoriteJoke);
     const id = useSelector(selectUserId);
 
-    
     const getJokes = useCallback(async () => {
         const favJoke = await fetch(`${baseUrl}/jokes/${id}`, {
             method: "GET",
@@ -35,7 +34,6 @@ const Dashboard = () => {
         return;
     }, [isLoggedIn, getJokes, navigate]);
     
-
     if (isLoggedIn) {
         return (
             <div className="dashboard-container">
@@ -46,8 +44,8 @@ const Dashboard = () => {
                     })}
                 </div>
             </div>
-        )
-    }
+        );
+    };
 };
 
 export default Dashboard;
