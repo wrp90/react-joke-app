@@ -3,6 +3,7 @@ import { Form, Button, Row, InputGroup } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
 // import { useDispatch } from 'react-redux';
 import { useState } from 'react';
+import './Register.css';
 
 const baseUrl = process.env.REACT_APP_BASE_URL;
 
@@ -47,7 +48,7 @@ const Register = () => {
     };
 
     return (
-        <div>
+        <div className="register-form">
             <Row className="register-container">
                 <h2>Sign up</h2>
                 <Form onSubmit={e => submitRegistration(e)}>

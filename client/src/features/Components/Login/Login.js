@@ -9,6 +9,7 @@ import {
     setUserInformation
 } from '../../../app/slices/userSlice';
 import { setFavoriteJokes } from '../../../app/slices/jokeSlice';
+import './Login.css';
 
 const baseUrl = process.env.REACT_APP_BASE_URL;
 
