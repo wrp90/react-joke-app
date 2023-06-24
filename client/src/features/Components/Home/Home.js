@@ -25,7 +25,7 @@ const Home = () => {
     };
 
     return (
-        <div>
+        <div className="home-container">
             <div className="joke-card">
                 <h1 className="title">Joke Generator</h1>
                 <p>Welcome to my joke site! Please select a joke type then hit the joke button to generate a joke!</p>

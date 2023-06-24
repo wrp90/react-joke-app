@@ -19,6 +19,12 @@
 }
 
 .joke-button {
-    background-color: purple !important
+    background-color: #F9C429 !important;
+    border-color: #F9C429 !important;
 }
-  
+
+#dropdown-basic-button {
+    background-color: #902D6A !important;
+    color: white;
+    border-color: #902D6A !important;
+}

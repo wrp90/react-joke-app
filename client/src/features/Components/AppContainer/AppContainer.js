@@ -4,6 +4,7 @@ import { selectIsLoggedIn, setIsLoggedIn, setUserId, setUserInformation } from '
 import { Container, Nav } from 'react-bootstrap';
 import { useCallback, useEffect } from 'react';
 import Navbar from 'react-bootstrap/Navbar';
+import './AppContainer.css'
 
 const baseUrl = process.env.REACT_APP_BASE_URL;
 
@@ -82,7 +83,7 @@ const AppContainer = ({ hideLogin }) => {
 
     return (
         <>
-            <Navbar className="border navbar-light bg-light p-2 justify-content-between" bg="light" expand="lg">
+            <Navbar className="custom-navbar border navbar-light p-2 justify-content-between" expand="lg">
                 <Navbar.Brand as={Link} to="/">
                     Joke Generator
                 </Navbar.Brand>
