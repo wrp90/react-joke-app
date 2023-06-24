@@ -4,7 +4,7 @@ const bcrypt = require('bcrypt');
 const cors = require('cors');
 const jwt = require('jsonwebtoken');
 const { User, Joke } = require('./models');
-require('dotenv').config();
+require('dotenv').config({path:'../.env'});
 
 const hostname = '127.0.0.1';
 const port = 3001;

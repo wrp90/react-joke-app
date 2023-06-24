@@ -6,6 +6,8 @@ import { selectFavoriteJoke, setFavoriteJokes } from "../../../app/slices/jokeSl
 import JokeCard from "../JokeCard/JokeCard";
 import './Dashboard.css'
 
+const baseUrl = process.env.REACT_APP_BASE_URL;
+
 const Dashboard = () => {
     const navigate = useNavigate();
     const dispatch = useDispatch();
@@ -16,7 +18,7 @@ const Dashboard = () => {
 
     
     const getJokes = useCallback(async () => {
-        const favJoke = await fetch(`http://localhost:3001/jokes/${id}`, {
+        const favJoke = await fetch(`${baseUrl}/jokes/${id}`, {
             method: "GET",
             headers: {
                 "Content-Type": "application/json"

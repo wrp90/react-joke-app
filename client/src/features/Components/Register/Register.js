@@ -1,11 +1,13 @@
 import { Form, Button, Row, InputGroup } from 'react-bootstrap';
-import { setIsLoggedIn, setUserInformation } from '../../../app/slices/userSlice';
+// import { setIsLoggedIn, setUserInformation } from '../../../app/slices/userSlice';
 import { useNavigate } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
+// import { useDispatch } from 'react-redux';
 import { useState } from 'react';
 
+const baseUrl = process.env.REACT_APP_BASE_URL;
+
 const Register = () => {
-    const dispatch = useDispatch()
+    // const dispatch = useDispatch()
     const navigate = useNavigate();
     const [showPassword, setShowPassword] = useState(false);
     const [password, setPassword] = useState('');
@@ -28,8 +30,8 @@ const Register = () => {
 
     const submitRegistration = async (event) => {
         event.preventDefault();
-        const url = 'http://localhost:3001/users';
-        const newUser = await fetch(url, {
+        const url = `${baseUrl}/users`;
+        await fetch(url, {
             method: "POST",
             body: JSON.stringify(user),
             headers: {
@@ -37,12 +39,11 @@ const Register = () => {
             }
         });
 
-        const data = await newUser.json();
 
-        const { firstName, lastName, email, userName } = data;
-        dispatch(setUserInformation({ firstName, lastName, email, userName }));
-        dispatch(setIsLoggedIn(true));
-        navigate('/');
+        // const { firstName, lastName, email, userName } = data;
+        // dispatch(setUserInformation({ firstName, lastName, email, userName }));
+        // dispatch(setIsLoggedIn(true));
+        navigate('/login');
     };
 
     return (

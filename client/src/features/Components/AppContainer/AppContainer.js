@@ -5,6 +5,8 @@ import { Container, Nav } from 'react-bootstrap';
 import { useCallback, useEffect } from 'react';
 import Navbar from 'react-bootstrap/Navbar';
 
+const baseUrl = process.env.REACT_APP_BASE_URL;
+
 const AppContainer = ({ hideLogin }) => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
@@ -16,7 +18,7 @@ const AppContainer = ({ hideLogin }) => {
     const hasToken = !!token;
 
     const fetchUserData = useCallback(async (event) => {
-        const url = `http://localhost:3001/user/${token}`;
+        const url = `${baseUrl}/user/${token}`;
         const newUser = await fetch(url, {
             method: "GET",
             headers: {

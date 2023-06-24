@@ -6,6 +6,8 @@ import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
 import './JokeCard.css'
 
+const baseUrl = process.env.REACT_APP_BASE_URL;
+
 const JokeCard = ({ joke, setButtonText, buttonText, showButton = true, showTwitterButton = false, showDeleteButton = false }) => {
   const dispatch = useDispatch();
   const isLoggedIn = useSelector(selectIsLoggedIn);
@@ -19,7 +21,7 @@ const JokeCard = ({ joke, setButtonText, buttonText, showButton = true, showTwit
   const saveJoke = async (event) => {
     event.preventDefault();
 
-    const url = 'http://localhost:3001/jokes';
+    const url = `${baseUrl}/jokes`;
     const newJoke = await fetch(url, {
       method: 'POST',
       body: JSON.stringify(jokeBody),
@@ -38,7 +40,7 @@ const JokeCard = ({ joke, setButtonText, buttonText, showButton = true, showTwit
     event.preventDefault();
 
     try {
-      const response = await fetch(`http://localhost:3001/jokes/${joke.id}`, {
+      const response = await fetch(`${baseUrl}/jokes/${joke.id}`, {
         method: 'DELETE',
         headers: {
           'Content-Type': 'application/json',

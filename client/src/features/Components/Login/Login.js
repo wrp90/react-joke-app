@@ -10,6 +10,8 @@ import {
 } from '../../../app/slices/userSlice';
 import { setFavoriteJokes } from '../../../app/slices/jokeSlice';
 
+const baseUrl = process.env.REACT_APP_BASE_URL;
+
 
 const Login = () => {
     const dispatch = useDispatch()
@@ -38,8 +40,7 @@ const Login = () => {
 
     const submitLogin = async (event) => {
         event.preventDefault();
-        const url = 'http://localhost:3001/login'
-        const newUser = await fetch(url, {
+        const newUser = await fetch(`${baseUrl}/login`, {
             method: "POST",
             body: JSON.stringify(user),
             headers: {
