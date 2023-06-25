@@ -28,7 +28,7 @@ const Home = () => {
         <div className="home-container">
             <div className="joke-card">
                 <h1 className="title">Joke Generator</h1>
-                <p className="welcome">Welcome to my joke site! Please select a joke type then hit the joke button to generate a joke!</p>
+                <p className="welcome">Welcome to my joke site! Please select a joke type then hit the joke button!</p>
                 <div className="joke-controls">
                     <DropdownButton
                         variant="info"
