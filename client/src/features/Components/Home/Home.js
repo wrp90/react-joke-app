@@ -28,21 +28,21 @@ const Home = () => {
         <div className="home-container">
             <div className="joke-card">
                 <h1 className="title">Joke Generator</h1>
-                <p>Welcome to my joke site! Please select a joke type then hit the joke button to generate a joke!</p>
+                <p className="welcome">Welcome to my joke site! Please select a joke type then hit the joke button to generate a joke!</p>
                 <div className="joke-controls">
                     <DropdownButton
                         variant="info"
                         id="dropdown-basic-button"
                         title={jokeType ? jokeType : 'Select Joke Type'}
-                        className="me-2"
+                        className="dropdown-menu-font me-2"
                     >
-                        <Dropdown.Item onClick={() => handleJokeTypeChange('Any')}>Any</Dropdown.Item>
-                        <Dropdown.Item onClick={() => handleJokeTypeChange('Miscellaneous')}>Miscellaneous</Dropdown.Item>
-                        <Dropdown.Item onClick={() => handleJokeTypeChange('Programming')}>Programming</Dropdown.Item>
-                        <Dropdown.Item onClick={() => handleJokeTypeChange('Dark')}>Dark</Dropdown.Item>
-                        <Dropdown.Item onClick={() => handleJokeTypeChange('Pun')}>Pun</Dropdown.Item>
+                        <Dropdown.Item className="dropdown-menu-font" onClick={() => handleJokeTypeChange('Any')}>Any</Dropdown.Item>
+                        <Dropdown.Item className="dropdown-menu-font" onClick={() => handleJokeTypeChange('Miscellaneous')}>Miscellaneous</Dropdown.Item>
+                        <Dropdown.Item className="dropdown-menu-font" onClick={() => handleJokeTypeChange('Programming')}>Programming</Dropdown.Item>
+                        <Dropdown.Item className="dropdown-menu-font" onClick={() => handleJokeTypeChange('Dark')}>Dark</Dropdown.Item>
+                        <Dropdown.Item className="dropdown-menu-font" onClick={() => handleJokeTypeChange('Pun')}>Pun</Dropdown.Item>
                     </DropdownButton>
-                    <Button variant="primary" className="joke-button" onClick={initAPI}>
+                    <Button variant="primary" className="dropdown-menu-font joke-button" onClick={initAPI}>
                         Joke
                     </Button>
                 </div>

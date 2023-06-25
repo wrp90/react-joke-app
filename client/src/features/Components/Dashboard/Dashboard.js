@@ -37,7 +37,7 @@ const Dashboard = () => {
     if (isLoggedIn) {
         return (
             <div className="dashboard-container">
-                <h1>Hello {userInformation.firstName}!</h1>
+                <h1 className="greeting">Hello {userInformation.firstName}!</h1>
                 <div className="favorite-joke-container">
                     {jokes.map((joke, index) => {
                         return <JokeCard showDeleteButton showTwitterButton showButton={false} joke={joke} key={index} />

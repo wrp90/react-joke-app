@@ -80,41 +80,43 @@ const Login = () => {
         <div>
             <Row className="login-container">
                 {message && <p>{message}</p>}
-                <h2 className="mb-2">Login</h2>
+                <h2 className="login-font mb-2">Login</h2>
                 <Form onSubmit={e => submitLogin(e)} className="login-form">
                     <Form.Group controlId="email">
-                        <Form.Label className="mt-3">Email address</Form.Label>
+                        <Form.Label className="login-font mt-3">Email address</Form.Label>
                         <Form.Control
                             name="email"
                             type="email"
                             placeholder="Enter email"
+                            className="login-font"
                             required onChange={(event) =>
                                 setUser({ ...user, email: event.target.value })
                             }
                         />
                     </Form.Group>
                     <Form.Group controlId="password">
-                        <Form.Label>Password</Form.Label>
+                        <Form.Label className="login-font">Password</Form.Label>
                         <InputGroup>
                             <Form.Control
                                 name="password"
                                 type={showPassword ? "text" : "password"}
                                 value={password}
+                                className="login-font"
                                 placeholder="Password"
                                 required onChange={(event) =>
                                     onPasswordEntry(event)
                                 }
                             />
-                            <Button variant="outline-secondary show-hide-button" onClick={togglePasswordVisibility}>
+                            <Button className="login-font" variant="outline-secondary show-hide-button" onClick={togglePasswordVisibility}>
                                 {showPassword ? 'Hide' : 'Show'}
                             </Button>
                         </InputGroup>
                     </Form.Group>
                     <div className="mt-3 d-flex align-items-center">
-                        <Button variant="primary" type="submit">
+                        <Button className="login-font login-color" variant="primary" type="submit">
                             Log In
                         </Button>
-                        <Form.Text className="ms-2">
+                        <Form.Text className="login-font ms-2">
                             No account?&nbsp;
                             <Link to="/register">Sign up!</Link>
                         </Form.Text>

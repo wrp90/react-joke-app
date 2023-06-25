@@ -3,3 +3,9 @@
     background-color: rgb(255, 255, 255);
     border-radius: 8px;
 }
+
+@import url('https://fonts.googleapis.com/css2?family=Arimo:ital,wght@1,500&display=swap');
+
+.register-font {
+    font-family: 'Arimo', sans-serif !important;
+}

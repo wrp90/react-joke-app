@@ -10,6 +10,18 @@
 .title {
     margin-bottom: 16px;
     font-family: 'Kablammo', cursive;
+    color: #902D6A !important;;
+}
+
+@import url('https://fonts.googleapis.com/css2?family=Kalam&display=swap');
+
+.welcome {
+    font-family: 'Kalam', cursive;
+    font-size: 24px;
+}
+
+.dropdown-menu-font {
+    font-family: 'Kalam', cursive !important;
 }
 
 .joke-controls {

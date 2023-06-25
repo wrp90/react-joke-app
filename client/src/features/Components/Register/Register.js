@@ -42,12 +42,13 @@ const Register = () => {
     return (
         <div className="register-form">
             <Row className="register-container">
-                <h2>Sign up</h2>
+                <h2 className="register-font">Sign up</h2>
                 <Form onSubmit={e => submitRegistration(e)}>
                     <Form.Group className="mt-2">
-                        <Form.Label className="mt-3">First name</Form.Label>
+                        <Form.Label className="register-font mt-3">First name</Form.Label>
                         <Form.Control
                             type="text"
+                            className="register-font"
                             placeholder="Enter First Name"
                             required onChange={(event) =>
                                 setUser({ ...user, firstName: event.target.value })
@@ -55,9 +56,10 @@ const Register = () => {
                         />
                     </Form.Group>
                     <Form.Group className="mt-2">
-                        <Form.Label>Last name</Form.Label>
+                        <Form.Label className="register-font">Last name</Form.Label>
                         <Form.Control
                             type="text"
+                            className="register-font"
                             placeholder="Enter Last Name"
                             required onChange={(event) =>
                                 setUser({ ...user, lastName: event.target.value })
@@ -65,9 +67,10 @@ const Register = () => {
                         />
                     </Form.Group>
                     <Form.Group className="mt-2">
-                        <Form.Label>Username</Form.Label>
+                        <Form.Label className="register-font">Username</Form.Label>
                         <Form.Control
                             type="text"
+                            className="register-font"
                             placeholder="Enter a Username"
                             required onChange={(event) =>
                                 setUser({ ...user, userName: event.target.value })
@@ -75,9 +78,10 @@ const Register = () => {
                         />
                     </Form.Group>
                     <Form.Group className="mt-2">
-                        <Form.Label>Email Address</Form.Label>
+                        <Form.Label className="register-font">Email Address</Form.Label>
                         <Form.Control
                             type="email"
+                            className="register-font"
                             placeholder="Enter email"
                             required onChange={(event) =>
                                 setUser({ ...user, email: event.target.value })
@@ -85,22 +89,23 @@ const Register = () => {
                         />
                     </Form.Group>
                     <Form.Group className="mt-2">
-                        <Form.Label>Password</Form.Label>
+                        <Form.Label className="register-font">Password</Form.Label>
                         <InputGroup>
                             <Form.Control
                                 type={showPassword ? 'text' : 'password'}
+                                className="register-font"
                                 value={password}
                                 placeholder="Password"
                                 required onChange={(event) =>
                                     onPasswordEntry(event)
                                 }
                             />
-                            <Button variant="outline-secondary show-hide-button" onClick={togglePasswordVisibility}>
+                            <Button className="register-font" variant="outline-secondary show-hide-button" onClick={togglePasswordVisibility}>
                                 {showPassword ? 'Hide' : 'Show'}
                             </Button>
                         </InputGroup>
                     </Form.Group>
-                    <Button variant="primary" className="mt-3 d-flex align-items-center" type="submit">
+                    <Button variant="primary" className="register-font mt-3 d-flex align-items-center" type="submit">
                         Submit
                     </Button>
                 </Form>

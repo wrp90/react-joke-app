@@ -60,25 +60,25 @@ const JokeCard = ({ joke, setButtonText, buttonText, showButton = true, showTwit
 
   return (
     <Card className="jokeCard" border="primary" style={{ width: '18rem', height: '28rem', marginTop: '32px', display: 'flex', flexDirection: 'column' }}>
-      <Card.Header>{joke.category}</Card.Header>
+      <Card.Header className="joke-text">{joke.category}</Card.Header>
       <Card.Body style={{ flex: '1 0 auto' }}>
-        <Card.Text>{joke.joke}</Card.Text>
+        <Card.Text className="joke-text">{joke.joke}</Card.Text>
       </Card.Body>
       <Card.Footer>
         {isLoggedIn && showButton && (
-          <Button className="save-button" disabled={buttonText === 'Saved'} onClick={saveJoke}>
+          <Button className="save-button joke-text" disabled={buttonText === 'Saved'} onClick={saveJoke}>
             {buttonText}
+          </Button>
+        )}
+        {showDeleteButton && (
+          <Button className="joke-text" variant="danger" onClick={deleteJoke}>
+            Delete
           </Button>
         )}
         {showTwitterButton && (
           <TwitterShareButton url={joke.joke}>
             <TwitterIcon style={{ height: '36px' }} />
           </TwitterShareButton>
-        )}
-        {showDeleteButton && (
-          <Button variant="danger" onClick={deleteJoke}>
-            Delete
-          </Button>
         )}
       </Card.Footer>
     </Card>

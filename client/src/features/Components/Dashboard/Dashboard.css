@@ -11,3 +11,12 @@
     align-items: center;
     gap: 16px;
 }
+
+@import url('https://fonts.googleapis.com/css2?family=Caveat:wght@500&display=swap');
+
+.greeting {
+    margin-bottom: 16px;
+    font-family: 'Caveat', cursive;
+    color: #902D6A !important;
+    font-size: 64px;
+}
