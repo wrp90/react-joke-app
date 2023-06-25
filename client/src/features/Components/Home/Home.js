@@ -1,13 +1,13 @@
 import { useDispatch, useSelector } from 'react-redux';
-import { selectCurrentJoke, setCurrentJoke } from '../../../app/slices/jokeSlice';
+import { selectCurrentJoke, selectJokeType, setCurrentJoke, setJokeType } from '../../../app/slices/jokeSlice';
 import { Button, Dropdown, DropdownButton } from 'react-bootstrap';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import JokeCard from '../JokeCard/JokeCard';
 import './Home.css';
 
 const Home = () => {
     const dispatch = useDispatch();
-    const [jokeType, setJokeType] = useState('');
+    const jokeType = useSelector(selectJokeType);
     const [buttonText, setButtonText] = useState('Save Joke');
     const initAPI = async () => {
         const userResponse = await fetch(
@@ -21,8 +21,22 @@ const Home = () => {
     const joke = useSelector(selectCurrentJoke);
 
     const handleJokeTypeChange = (type) => {
-        setJokeType(type);
+        dispatch(setJokeType(type));
     };
+
+    useEffect(() => {
+        const reloadHomePage = () => {
+            if (window.location.pathname === '/' && document.visibilityState === 'visible') {
+                window.location.reload();
+            }
+        };
+
+        window.addEventListener('visibilitychange', reloadHomePage);
+
+        return () => {
+            window.removeEventListener('visibilitychange', reloadHomePage);
+        };
+    }, []);
 
     return (
         <div className="home-container">

@@ -5,6 +5,7 @@ const initialState = {
     currentJoke: '',
     favoriteJokes: [],
     jokeId: null,
+    jokeType: '',
 };
 
 export const jokesSlice = createSlice({
@@ -25,18 +26,23 @@ export const jokesSlice = createSlice({
         setFavoriteJokes: (state, action) => {
             state.favoriteJokes = action.payload;
         },
+        setJokeType: (state, action) => {
+            state.jokeType = action.payload;
+        },
         resetJokeSlice: (state, action) => {
             state = initialState;
         },
     },
 });
 
-export const { setCurrentJoke, addFavoriteJoke, deleteFavoriteJoke, setFavoriteJokes, resetJokeSlice, } = jokesSlice.actions;
+export const { setCurrentJoke, addFavoriteJoke, deleteFavoriteJoke, setFavoriteJokes, resetJokeSlice, setJokeType } = jokesSlice.actions;
 
 export const selectCurrentJoke = (state) => state.jokes.currentJoke;
 
 export const selectFavoriteJoke = (state) => state.jokes.favoriteJokes;
 
 export const selectJokeId = (state) => state.jokes.id;
+
+export const selectJokeType = (state) => state.jokes.jokeType;
 
 export default jokesSlice.reducer;
