@@ -19,3 +19,7 @@
     border-color: #902D6A !important;
     font-family: 'Arimo', sans-serif !important;
 }
+
+.login-form .show-hide-button:hover {
+    background-color: #F9C429 !important;
+}

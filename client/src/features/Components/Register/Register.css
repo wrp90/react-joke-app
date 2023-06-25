@@ -19,3 +19,7 @@
     border-color: #F9C429 !important;
     font-family: 'Arimo', sans-serif !important;
 }
+
+.register-form .show-hide-button:hover {
+    background-color: #902D6A !important;
+}

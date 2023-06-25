@@ -1,4 +1,5 @@
 import { Form, Button, Row, InputGroup } from 'react-bootstrap';
+import { BsEye, BsEyeSlash } from 'react-icons/bs';
 import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 import './Register.css';
@@ -100,8 +101,12 @@ const Register = () => {
                                     onPasswordEntry(event)
                                 }
                             />
-                            <Button className="register-font" variant="outline-secondary show-hide-button" onClick={togglePasswordVisibility}>
-                                {showPassword ? 'Hide' : 'Show'}
+                            <Button
+                                className={`register-font ${showPassword ? 'active' : ''}`}
+                                variant="outline-secondary show-hide-button"
+                                onClick={togglePasswordVisibility}
+                            >
+                                {showPassword ? <BsEyeSlash /> : <BsEye />}
                             </Button>
                         </InputGroup>
                     </Form.Group>

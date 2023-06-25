@@ -10,6 +10,7 @@ import {
 } from '../../../app/slices/userSlice';
 import { setFavoriteJokes } from '../../../app/slices/jokeSlice';
 import './Login.css';
+import { BsEye, BsEyeSlash } from 'react-icons/bs';
 
 const baseUrl = process.env.REACT_APP_BASE_URL;
 
@@ -77,7 +78,7 @@ const Login = () => {
     }, [isLoggedIn, navigate]);
 
     return (
-        <div>
+        <div className="login-form">
             <Row className="login-container">
                 {message && <p>{message}</p>}
                 <h2 className="login-font mb-2">Login</h2>
@@ -107,8 +108,12 @@ const Login = () => {
                                     onPasswordEntry(event)
                                 }
                             />
-                            <Button className="login-font" variant="outline-secondary show-hide-button" onClick={togglePasswordVisibility}>
-                                {showPassword ? 'Hide' : 'Show'}
+                            <Button
+                                className={`login-font ${showPassword ? 'active' : ''}`}
+                                variant="outline-secondary show-hide-button"
+                                onClick={togglePasswordVisibility}
+                            >
+                                {showPassword ? <BsEyeSlash /> : <BsEye />}
                             </Button>
                         </InputGroup>
                     </Form.Group>
