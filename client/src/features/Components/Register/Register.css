@@ -9,3 +9,13 @@
 .register-font {
     font-family: 'Arimo', sans-serif !important;
 }
+
+.register-color {
+    background-color: #F9C429 !important;
+}
+
+.submit-button {
+    background-color: #F9C429 !important;
+    border-color: #F9C429 !important;
+    font-family: 'Arimo', sans-serif !important;
+}

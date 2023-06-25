@@ -113,7 +113,7 @@ const Login = () => {
                         </InputGroup>
                     </Form.Group>
                     <div className="mt-3 d-flex align-items-center">
-                        <Button className="login-font login-color" variant="primary" type="submit">
+                        <Button className="login-button" variant="primary" type="submit">
                             Log In
                         </Button>
                         <Form.Text className="login-font ms-2">

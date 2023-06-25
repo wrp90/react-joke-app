@@ -13,3 +13,9 @@
 .login-color {
     background-color: #902D6A !important;
 }
+
+.login-button {
+    background-color: #902D6A !important;
+    border-color: #902D6A !important;
+    font-family: 'Arimo', sans-serif !important;
+}

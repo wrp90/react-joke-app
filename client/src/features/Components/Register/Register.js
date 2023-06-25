@@ -105,7 +105,7 @@ const Register = () => {
                             </Button>
                         </InputGroup>
                     </Form.Group>
-                    <Button variant="primary" className="register-font mt-3 d-flex align-items-center" type="submit">
+                    <Button className="submit-button mt-3 d-flex align-items-center" type="submit">
                         Submit
                     </Button>
                 </Form>
