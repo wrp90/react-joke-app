@@ -1,19 +1,26 @@
 {
-  "dependencies": {
-    "concurrently": "^8.2.0"
-  },
   "name": "react-joke-app",
-  "description": "",
   "version": "1.0.0",
+  "description": "",
   "main": "index.js",
-  "devDependencies": {},
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "setup": "npm i; cd server && npm i; cd ../client && npm i; npm run build",
     "dev": "concurrently \"cd server && npm run dev\" \"cd client && npm start\"",
     "start": "cd server && npm start"
   },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jdmelin/stock-tracker-deployment-example.git"
+  },
   "keywords": [],
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/wrp90/react-joke-app/issues"
+  },
+  "homepage": "https://github.com/wrp90/react-joke-app#readme",
+  "dependencies": {
+    "concurrently": "^8.0.1"
+  }
 }
