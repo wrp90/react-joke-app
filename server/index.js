@@ -23,20 +23,9 @@ if (process.env.NODE_ENV === 'production') {
 }
 
 app.use(express.static(path.join(__dirname, staticPath)));
-
-app.use(express.static('public'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cors({ origin: (orig, cb) => cb(null, true), credentials: true }));
-
-// app.get('/health', (req, res) => {
-//     const data = {
-//         uptime: process.uptime(),
-//         message: 'Ok',
-//         date: new Date()
-//     };
-//     res.status(200).send(data);
-// });
 
 app.post('/users', async (req, res) => {
     const { firstName, lastName, userName, email, password } = req.body;
@@ -148,6 +137,10 @@ app.delete('/jokes/:id', async (req, res) => {
     } catch (error) {
         res.status(500).json({ error: 'Internal server error' });
     };
+});
+
+app.get('*', (req, res) => {
+    res.sendFile(path.join(__dirname, staticPath, 'index.html'));
 });
 
 server.listen(port, hostname, () => {
