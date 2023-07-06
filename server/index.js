@@ -15,6 +15,14 @@ require('dotenv').config({
 const app = express();
 const server = http.createServer(app);
 
+let staticPath = '../client/public';
+
+if (process.env.NODE_ENV === 'production') {
+  staticPath = '../client/build';
+}
+
+// app.use(express.static(path.join(__dirname, staticPath)));
+
 app.use(express.static('public'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
