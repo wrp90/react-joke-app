@@ -29,12 +29,12 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cors({ origin: (orig, cb) => cb(null, true), credentials: true }));
 
-app.get(':1000/health', (req, res) => {
+app.get('/health', (req, res) => {
     const data = {
-      uptime: process.uptime(),
-      message: 'Ok',
-      date: new Date()
-    }
+        uptime: process.uptime(),
+        message: 'Ok',
+        date: new Date()
+    };
     res.status(200).send(data);
 });
 
