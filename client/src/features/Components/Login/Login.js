@@ -55,7 +55,7 @@ const Login = () => {
         };
 
         if (!data.user.id) return 
-        const favJoke = await fetch(`http://localhost:3001/jokes/${data.user.id}`, {
+        const favJoke = await fetch(`${baseUrl}/jokes/${data.user.id}`, {
             method: "GET",
             headers: {
                 "Content-Type": "application/json"
