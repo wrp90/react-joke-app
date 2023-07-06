@@ -6,7 +6,7 @@ const jwt = require('jsonwebtoken');
 const path = require('path');
 const { User, Joke } = require('./models');
 
-const hostname = '127.0.0.1';
+const hostname = '0.0.0.0';
 const port = process.env.PORT || 3001
 
 require('dotenv').config({
