@@ -28,6 +28,10 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cors({ origin: (orig, cb) => cb(null, true), credentials: true }));
 
+app.get('/', (req, res) => {
+    res.sendStatus(200)
+})
+
 app.post('/users', async (req, res) => {
     const { firstName, lastName, userName, email, password } = req.body;
     const user = await User.findOne({
