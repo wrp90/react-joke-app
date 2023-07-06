@@ -3,6 +3,7 @@ const express = require('express');
 const bcrypt = require('bcrypt');
 const cors = require('cors');
 const jwt = require('jsonwebtoken');
+const path = require('path');
 const { User, Joke } = require('./models');
 
 const hostname = '127.0.0.1';
@@ -21,16 +22,12 @@ if (process.env.NODE_ENV === 'production') {
   staticPath = '../client/build';
 }
 
-// app.use(express.static(path.join(__dirname, staticPath)));
+app.use(express.static(path.join(__dirname, staticPath)));
 
 app.use(express.static('public'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cors({ origin: (orig, cb) => cb(null, true), credentials: true }));
-
-app.get('/health', (req, res) => {
-    res.sendStatus(200).send('Ok');
-})
 
 app.post('/users', async (req, res) => {
     const { firstName, lastName, userName, email, password } = req.body;
@@ -98,7 +95,7 @@ app.post('/jokes', async (req, res) => {
     res.send(savedJoke);
 });
 
-router.get('/health', (req, res) => {
+app.get('/health', (req, res) => {
     const data = {
       uptime: process.uptime(),
       message: 'Ok',
