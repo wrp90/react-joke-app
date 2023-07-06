@@ -29,6 +29,16 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cors({ origin: (orig, cb) => cb(null, true), credentials: true }));
 
+app.get('/health', (req, res) => {
+    const data = {
+      uptime: process.uptime(),
+      message: 'Ok',
+      date: new Date()
+    }
+  
+    res.status(200).send(data);
+});
+
 app.post('/users', async (req, res) => {
     const { firstName, lastName, userName, email, password } = req.body;
     const user = await User.findOne({
@@ -93,16 +103,6 @@ app.post('/jokes', async (req, res) => {
         category,
     });
     res.send(savedJoke);
-});
-
-app.get('/health', (req, res) => {
-    const data = {
-      uptime: process.uptime(),
-      message: 'Ok',
-      date: new Date()
-    }
-  
-    res.status(200).send(data);
 });
 
 app.get('/user/:token', async (req, res) => {
