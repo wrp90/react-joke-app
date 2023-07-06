@@ -28,8 +28,8 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cors({ origin: (orig, cb) => cb(null, true), credentials: true }));
 
-app.get('/', (req, res) => {
-    res.sendStatus(200)
+app.get('/health', (req, res) => {
+    res.sendStatus(200).send('Ok');
 })
 
 app.post('/users', async (req, res) => {
@@ -96,6 +96,16 @@ app.post('/jokes', async (req, res) => {
         category,
     });
     res.send(savedJoke);
+});
+
+router.get('/health', (req, res) => {
+    const data = {
+      uptime: process.uptime(),
+      message: 'Ok',
+      date: new Date()
+    }
+  
+    res.status(200).send(data);
 });
 
 app.get('/user/:token', async (req, res) => {
