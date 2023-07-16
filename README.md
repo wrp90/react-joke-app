@@ -1,5 +1,5 @@
 
-# Project Title
+# Joke Generator
 
 This is a simple CRUD application that searches for a joke from the jokeAPI. The user can save the joke, delete or post it to twitter.
 
