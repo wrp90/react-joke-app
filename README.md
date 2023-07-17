@@ -10,9 +10,14 @@ This is a simple CRUD application that searches for a joke from the jokeAPI. The
 * React
 * Redux
 * React Bootstrap
+* React Router
 * bcrypt
 * Sequelize
+* Express
 * PostgreSQL
+* bcrypt
+* dotenv
+* JSON Web Token 
 
 ## Deployed Link
 
