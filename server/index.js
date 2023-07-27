@@ -29,26 +29,32 @@ app.use(cors({ origin: (orig, cb) => cb(null, true), credentials: true }));
 
 app.post('/users', async (req, res) => {
     const { firstName, lastName, userName, email, password } = req.body;
-    const user = await User.findOne({
+    const existingEmail = await User.findOne({
         where: {
-            userName: req.body.userName
-        }
+            email: email,
+        },
     });
-    if (user) {
-        res.send({
-            message: "User name already in use"
-        });
-    } else {
-        const hashedPassword = await bcrypt.hash(password, 10);
-        const newUser = await User.create({
-            firstName,
-            lastName,
-            userName,
-            email,
-            password: hashedPassword,
-        });
-        res.send(newUser);
-    };
+    if (existingEmail) {
+        return res.status(400).json({ message: 'Email already in use' });
+    }
+    const existingUserName = await User.findOne({
+        where: {
+            userName: userName,
+        },
+    });
+    if (existingUserName) {
+        return res.status(400).json({ message: 'Username already in use' });
+    }
+    const hashedPassword = await bcrypt.hash(password, 10);
+    const newUser = await User.create({
+        firstName,
+        lastName,
+        userName,
+        email,
+        password: hashedPassword,
+    });
+
+    res.status(201).json(newUser);
 });
 
 app.post('/login', async (req, res) => {

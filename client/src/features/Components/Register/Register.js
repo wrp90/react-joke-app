@@ -1,4 +1,4 @@
-import { Form, Button, Row, InputGroup } from 'react-bootstrap';
+import { Form, Button, Row, InputGroup, Alert } from 'react-bootstrap';
 import { BsEye, BsEyeSlash } from 'react-icons/bs';
 import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
@@ -10,6 +10,7 @@ const Register = () => {
     const navigate = useNavigate();
     const [showPassword, setShowPassword] = useState(false);
     const [password, setPassword] = useState('');
+    const [error, setError] = useState(null);
     const [user, setUser] = useState({
         firstName: "",
         lastName: "",
@@ -30,20 +31,31 @@ const Register = () => {
     const submitRegistration = async (event) => {
         event.preventDefault();
         const url = `${baseUrl}/users`;
-        await fetch(url, {
-            method: "POST",
-            body: JSON.stringify(user),
-            headers: {
-                "Content-Type": "application/json"
+        try {
+            const response = await fetch(url, {
+                method: "POST",
+                body: JSON.stringify(user),
+                headers: {
+                    "Content-Type": "application/json"
+                }
+            });
+            const data = await response.json();
+            if (response.ok) {
+                navigate('/login');
+            } else {
+                setError(data.message);
             }
-        });
-        navigate('/login');
+        } catch (error) {
+            console.error('Error:', error);
+            setError('An error occurred. Please try again later.');
+        }
     };
 
     return (
         <div className="register-form">
             <Row className="register-container">
                 <h2 className="register-font">Sign up</h2>
+                {error && <Alert variant="danger">{error}</Alert>} 
                 <Form onSubmit={e => submitRegistration(e)}>
                     <Form.Group className="mt-2">
                         <Form.Label className="register-font mt-3">First name</Form.Label>
