@@ -21,3 +21,22 @@ body {
   min-height: 100vh;
 }
 
+/* Mobile styles */
+body {
+  font-size: 16px;
+}
+
+/* Tablet styles */
+@media (min-width: 768px) {
+  body {
+    font-size: 18px;
+  }
+}
+
+/* Desktop styles */
+@media (min-width: 992px) {
+  body {
+    font-size: 20px;
+  }
+}
+
