@@ -1,6 +1,4 @@
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
-import { selectIsLoggedIn } from './app/slices/userSlice';
-import { useSelector } from 'react-redux';
 import React from 'react';
 import Home from './features/Components/Home/Home';
 import Dashboard from './features/Components/Dashboard/Dashboard';
@@ -11,22 +9,23 @@ import Logout from './features/Components/Logout/Logout';
 import AppContainer from './features/Components/AppContainer/AppContainer';
 import './App.css';
 
-
 function App() {
-  const isLoggedIn = useSelector(selectIsLoggedIn);
-
   return (
     <div className="App">
       <BrowserRouter>
         <Routes>
-          <Route element={<AppContainer />}>
-            <Route path="/" element={
-              <ProtectedRoute>
-                <Home />
-              </ProtectedRoute>} />
-            {!isLoggedIn && <Route path="/login" element={<Login />} />}
+          <Route path="/" element={<AppContainer />}>
+            <Route
+              path="/"
+              element={
+                <ProtectedRoute>
+                  <Home />
+                </ProtectedRoute>
+              }
+            />
+            <Route path="/login" element={<Login />} />
             <Route path="/logout" element={<Logout />} />
-            {!isLoggedIn && <Route path="/register" element={<Register />} />}
+            <Route path="/register" element={<Register />} />
             <Route
               path="/dashboard"
               element={
@@ -40,6 +39,6 @@ function App() {
       </BrowserRouter>
     </div>
   );
-};
+}
 
 export default App;
