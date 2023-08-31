@@ -34,17 +34,30 @@ app.post('/users', async (req, res) => {
             email: email,
         },
     });
+
     if (existingEmail) {
-        return res.status(400).json({ message: 'Email already in use' });
+        return res.status(400).json({ message: 'Email already in use.' });
     }
+
     const existingUserName = await User.findOne({
         where: {
             userName: userName,
         },
     });
+
     if (existingUserName) {
-        return res.status(400).json({ message: 'Username already in use' });
+        return res.status(400).json({ message: 'Username already in use.' });
     }
+    if (!password || password.length < 6) {
+        return res.status(400).json({ message: 'Password must be at least 6 characters long.' });
+    }
+    if (!/[A-Z]/.test(password)) {
+        return res.status(400).json({ message: 'Password must contain at least one capital letter.' });
+    }
+    if (!/\d/.test(password)) {
+        return res.status(400).json({ message: 'Password must contain at least one number.' });
+    }
+
     const hashedPassword = await bcrypt.hash(password, 10);
     const newUser = await User.create({
         firstName,
@@ -63,6 +76,7 @@ app.post('/login', async (req, res) => {
             email: req.body.email
         }
     });
+
     if (user) {
         const auth = await bcrypt.compare(
             req.body.password,
@@ -91,11 +105,13 @@ app.post('/login', async (req, res) => {
 
 app.post('/jokes', async (req, res) => {
     const { joke, userId, category } = req.body;
+
     const savedJoke = await Joke.create({
         joke,
         userId,
         category,
     });
+
     res.send(savedJoke);
 });
 
@@ -127,11 +143,13 @@ app.get('/jokes/:userId', async (req, res) => {
             userId: req.params.userId
         }
     });
+
     res.send(favJoke);
 });
 
 app.delete('/jokes/:id', async (req, res) => {
     const { id } = req.params;
+
     try {
         const joke = await Joke.findByPk(id);
         if (!joke) {
